@@ -22,17 +22,17 @@ To configure the PPA on your machine and install ansible run these commands: ( U
 ======================================================
 Adding Hosts to the Hosts File
 ======================================================
-
-$ echo "127.0.0.1" > ~/ansible_hosts
-$ export ANSIBLE_HOSTS=~/ansible_hosts
+Run the below commands to create and set your ansible Hosts file,
+  $ echo "127.0.0.1" > ~/ansible_hosts
+  $ export ANSIBLE_HOSTS=~/ansible_hosts
 
 You can add more hosts to the file in the below format,
-[host groups 1]
-foo.example.com
-bar.example.com
+  [host groups 1]
+  foo.example.com
+  bar.example.com
 
-[host groups 2]
-one.example.com
+  [host groups 2]
+  one.example.com
 
 ======================================================
 Executing the Role to install Cloudmesh_Client
