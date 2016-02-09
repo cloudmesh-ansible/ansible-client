@@ -35,7 +35,7 @@ $ export ANSIBLE_HOSTS=~/ansible_hosts
 You can add more hosts to the file in the below format,
   [host groups 1]
     foo.example.com
-    bar.example.com
+      bar.example.com
 
   [host groups 2]
     one.example.com
