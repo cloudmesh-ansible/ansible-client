@@ -1,3 +1,7 @@
 ---
+# defaults file for python
 
-cloudmesh_client_virtualenv: false
+python2_version: 2.7.10
+python2_enabled: false
+python_defaults:
+  - "{{ python2_version }}"

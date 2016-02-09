@@ -1,4 +1,0 @@
----
-# file: site.yml
-- hosts: ubuntu
-  - include: Ubuntu.yml
