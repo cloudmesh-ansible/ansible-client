@@ -44,11 +44,11 @@ Run the below commands to create and set your ansible Hosts file::
 You can add more hosts to the file in the below format::
 
   [host groups 1]
-    foo.example.com
-      bar.example.com
+  foo.example.com
+  bar.example.com
 
   [host groups 2]
-    one.example.com
+  one.example.com
 
 ======================================================
 Executing the Role to install Cloudmesh_Client
