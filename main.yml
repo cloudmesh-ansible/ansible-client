@@ -1,4 +1,4 @@
 ---
-- hosts: ubuntu
+- hosts: ubuntu15
   roles:
-    - { role: cloudmesh_client}
+    - { role: cloudmesh_client }

@@ -1,0 +1,76 @@
+---
+ - name: Update Cache in apt-get
+   apt: update_cache=yes
+   tags:
+      - full
+      - apt_update
+
+ - name: Download Python2.7.10
+   get_url:
+      url="https://www.python.org/ftp/python/{{ python2_version }}/Python-{{ python2_version }}.tgz"
+      dest=/tmp
+   register: wget
+
+ - name: Extracting from Python Zip Files
+   unarchive:
+      src={{ wget.dest }}
+      dest=/tmp
+      copy=no
+   register: untar
+
+ - name: Install Basic Python Packages
+   apt: pkg={{ system_packages }} state=latest
+   tags:
+      - full
+      - python_basics
+
+ - name: Install Other Python Packages
+   apt: pkg={{ other_python_pkgs }} state=latest
+   tags:
+      - full
+      - other_pkgs
+
+ - name: configure and make
+   shell: ./configure && make -j{{ j }} chdir="{{ untar.src | regex_replace('\.tgz$', '') }}"
+
+ - name: make install
+   shell: make install -j{{ j }} chdir="{{ untar.src | regex_replace('\.tgz$', '') }}"
+
+ - name: Install VirtualENV
+   pip: name=virtualenv state=latest
+
+ - name: Install Pip,VirtualENV and Create virtualenv
+   pip:
+     name={{ item }}
+     state=latest
+     virtualenv=/home/ubuntu/ENV_new2
+     virtualenv_command=/usr/local/bin/virtualenv
+     extra_args='--upgrade'
+   with_items:
+       - python
+       - pip
+       - simplejson
+       - virtualenv
+       - readline
+   tags:
+      - full
+      - virtualenv
+
+ - name: Install Packages (easy_install method)
+   easy_install: name={{ item }} virtualenv=/home/ubuntu/ENV virtualenv_command=/usr/local/bin/virtualenv
+   with_items:
+       - pycrypto
+
+ - name: Install CloudMesh_Client
+   pip: name={{ item }} state=latest virtualenv=/home/ubuntu/ENV virtualenv_command=/usr/local/bin/virtualenv
+   with_items:
+       - cloudmesh_client
+   when: install_opt == "pip"
+
+ - name: Install cloudmesh_client [ Source Method (git clone) ]
+   git: repo=git://github.com/cloudmesh/client.git dest=/tmp/git
+   when: install_opt == "source"
+
+ - name: Install cloudmesh_client [ Source Method (Installation) ]
+   shell: "source ~/ENV/bin/activate; python /tmp/git/setup.py install"
+   when: install_opt == "source"

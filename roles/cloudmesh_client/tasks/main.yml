@@ -1,42 +1,6 @@
 ---
-
- - name: Install Python 2.7.10
-   apt: pkg=python state=latest
-
- - name: Install Basic Python Packages
-   apt: pkg={{ item }} state=latest
-   with_items:
-       - python-setuptools
-       - python-pip
-       - python-dev
-       - libncurses-dev
-       - git
-
- - name: Install Packages (easy_install method)
-   easy_install: name={{ item }}
-   with_items:
-       - pycrypto
-
- - name: Install Packages (VirtualEnv)
-   pip: name={{ item }} state=latest
-   with_items:
-       - virtualenv
-       - readline
-
- - name: Install Other Python Packages
-   apt: pkg={{ item }} state=latest
-   with_items:
-       - build-essential
-       - libreadline-gplv2-dev
-       - libncursesw5-dev
-       - libssl-dev
-       - libsqlite3-dev
-       - tk-dev
-       - libgdbm-dev
-       - libc6-dev
-       - libbz2-dev
-
- - name: Install CloudMesh_Client
-   pip: name={{ item }} state=latest
-   with_items:
-       - cloudmesh_client
+ - name: Include Appropriate Tasks File
+   include: fedora.yml
+   when: ansible_os_family == "RedHat"
+   include: ubuntu.yml
+   when: ansible_os_family == "Debian"

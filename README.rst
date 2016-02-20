@@ -13,8 +13,8 @@ How to do that can be found for example in the cloudmesh_client documentation at
 
 * http://cloudmesh.github.io/client/system.html
 
-YOu should only update your system and not install cloudmesh_client from the instructions above, as this ansible role will install cloudmesh client for you. We assume you have pip installed and updated with::
-  
+You should only update your system and not install cloudmesh_client from the instructions above, as this ansible role will install cloudmesh client for you. We assume you have pip installed and updated with::
+
   $ pip install pip -U
   $ pip install ansible
 
@@ -56,5 +56,4 @@ Executing the Role to install Cloudmesh_Client
 
 Now you can install cloudmesh on the specified hosts with the command::
 
-  $ ansible-playbook -s client.yml
-  
+  $ ansible-playbook -s main.yml
