@@ -57,3 +57,12 @@ Executing the Role to install Cloudmesh_Client
 Now you can install cloudmesh on the specified hosts with the command::
 
   $ ansible-playbook -s main.yml
+
+======================================================
+Installation Options: -
+======================================================
+
+By default, Cloudmesh_client will be installed from the source. A pip
+installation can be done by passing the method as a argument.
+
+  $ ansible-playbook -s main.yml --extra-vars "install_opt=pip"
