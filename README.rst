@@ -63,6 +63,6 @@ Installation Options: -
 ======================================================
 
 By default, Cloudmesh_client will be installed from the source. A pip
-installation can be done by passing the method as a argument.
+installation can be done by passing the method as a argument::
 
   $ ansible-playbook -s main.yml --extra-vars "install_opt=pip"
